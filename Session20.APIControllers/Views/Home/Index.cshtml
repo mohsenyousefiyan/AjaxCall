@@ -1,0 +1,53 @@
+﻿@model List<Session20.APIControllers.Models.Person>
+@{
+    ViewData["Title"] = "Index";
+}
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>FirstName</td>
+            <td>LastName</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+    <div>
+        <input id="FirstName" type="text"/>
+        <input id="LastName" type="text"/>
+        <input type="button" value="save" onclick="AddPerson()"/>
+    </div>
+
+
+<script type="text/javascript">
+
+    function AddPerson() {       
+        
+        var person = {
+            Id: 1,
+            FirstName:$("#FirstName").val(),
+            LastName:$("#LastName").val()
+        }
+        $.ajax({
+            url: "/api/person",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",               
+            dataType: "json",
+            data: JSON.stringify(person),
+            success: function (data) {                
+            }
+        });
+
+    }   
+</script>
